@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<robot name="holder.urdf">
+  <link name="baseLink">
+    <contact>
+      <restitution value="0.0" />
+      <lateral_friction value="0.15"/>
+      <rolling_friction value="0.0"/>
+      <contact_cfm value="0.0"/>
+      <contact_erp value="1.0"/>
+    </contact>
+
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.01"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+
+    <visual>
+      <!-- [0.1360 0.2656 -0.5224] -->
+      <origin rpy="0 0 0" xyz="0 0 0.05"/>
+      <geometry>
+        <mesh filename="bolt/blender_holder_40mm_inner.obj_vhacd.obj" scale="1 1 1"/>
+      </geometry>
+       <material name="blue">
+        <color rgba="0 0 1 0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.05"/>
+      <geometry>
+	 	<mesh filename="bolt/blender_holder_40mm_inner.obj_vhacd.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+</robot>

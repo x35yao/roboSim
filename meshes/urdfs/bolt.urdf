@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<robot name="bolt.urdf">
+  <link name="baseLink">
+    <contact>
+      <restitution value="0.0" />
+      <lateral_friction value="0.15"/>
+      <rolling_friction value="0.0"/>
+      <contact_cfm value="0.0"/>
+      <contact_erp value="1.0"/>
+    </contact>
+
+    <inertial>
+      <origin rpy="0 0 0" xyz="-1.9700000000e-06  7.4100000000e-06  6.2192280000e-02"/>
+      <mass value="0.0075"/>
+
+      <inertia ixx="7.2749101405e-06" ixy="4.3246839828e-11" ixz="-7.6769027288e-10" iyy="7.2747014891e-06" iyz="2.9774564052e-09" izz="3.0108308392e-06"/>
+
+      <!-- <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/> -->
+    </inertial>
+
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.045"/>
+      <!-- <geometry>
+        <mesh filename="bolt/blender_bolt_005_clean_mesh.dae" scale="1 1 1"/>
+      </geometry> -->
+      <geometry>
+        <!-- Bolt trunk visual model-->
+        <cylinder radius="0.01" length="0.09"/>
+      </geometry>
+        <material name="red">
+          <!-- <color rgba="1 0 0 1"/> -->
+          <color rgba="0 0 0 1"/>
+        </material>
+    </visual>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.103175"/>
+      <!-- <geometry>
+        <mesh filename="bolt/blender_bolt_005_clean_mesh.dae" scale="1 1 1"/>
+      </geometry> -->
+      <geometry>
+        <!-- Bolt head visual model-->
+        <cylinder radius="0.035" length="0.02635"/>
+      </geometry>
+       <material name="red">
+        <!-- <color rgba="1 0 0 1"/> -->
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+
+
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.045"/>
+      <geometry>
+        <!-- Bolt trunk collision model-->
+        <cylinder radius="0.01" length="0.09"/>
+      </geometry>
+      <!-- <geometry>
+	 	<mesh filename="bolt/blender_bolt_005_clean_mesh.dae" scale="1 1 1"/>
+      </geometry> -->
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.103175"/>
+      <geometry>
+        <!-- Bolt head collision model-->
+        <cylinder radius="0.035" length="0.02635"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz = "0 0 0.129525"/>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+    </collision>
+  </link>
+</robot>
