@@ -24,7 +24,7 @@ Mesh = collections.namedtuple(
     'Mesh',
     'urdf_path mesh_pos mesh_orn orig_axis is_fixed num_copies randomize_pose')
 meshes = {}
-num_copies = 1
+num_copies = 3
 
 meshes['ground_plane'] = Mesh(urdf_path="plane.urdf",
                               mesh_pos=[0, 0, 0],

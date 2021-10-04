@@ -167,7 +167,7 @@ class RoboSim(object):
                                   log_data)
   from .sim_main import (
       step, get_world_states, _is_there_nut_in_jig, _is_there_bolt_in_jig,
-      move_robot, move_gripper_smoothly, move_gripper, assemble, clean, excute_action,
+      move_robot, move_gripper_smoothly, move_gripper, assemble, clean, execute_action,
       get_finger_dist, _compare_coords_equal, _calc_next_coord,
       validate_position, validate_orn, freeze_obj, execute_pick_up,
       execute_put_down, orient_gripper_bolt, _set_robot_pose, _get_robot_pos,

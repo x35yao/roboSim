@@ -50,7 +50,7 @@ def assemble(self):
             self.planner_action = action
             print('Cur Action: {}'.format(action))
             # raise
-            self.excute_action(action)
+            self.execute_action(action)
             self.num_trials += 1
         else: # Can't plan due to lack of objcts
             break
@@ -73,15 +73,13 @@ def clean(self):
         ind_to_clean = ind_nut + ind_bolt
         target_obj = np.random.choice(['nut', 'bolt'])
         target_ind = self.meshes[target_obj][0]
-        self.record_snapshot('Start cleaning')
         if target_ind in ind_nut:
             # this object is a nut
             action = 'CLEAN_NUT'
         elif target_ind in ind_bolt:
             action = 'CLEAN_BOLT'
-        self.excute_action(action)
-        pos,_ = self.bt.getBasePositionAndOrientation(target_ind)
-        if _is_in_bin(self, target_ind, bin_target):
+        self.execute_action(action)
+        if _is_in_bin(self, target_ind, bin_target, 0.4):
             task_finished = True
         self.num_trials += 1
     self.record_snapshot('Cleaned')
@@ -93,7 +91,7 @@ def run_watchdog_bin_picking(self, mesh_names):
     for mesh_name in mesh_names:
         meshes = self.meshes[mesh_name]
         for i, mesh in enumerate(meshes):
-            if not _is_in_bin(self, mesh, bin_origin):
+            if not _is_in_bin(self, mesh, bin_origin, 0.4):
                 self.bt.removeBody(mesh)
                 del meshes[i]
         self.meshes[mesh_name] = meshes
@@ -160,8 +158,8 @@ def run_watchdog(self, mesh_names):
     return should_reset_simulation
 
 
-def excute_action(self, action):
-    self.record_snapshot(self.planner_action)
+def execute_action(self, action):
+    self.record_snapshot(action)
   # if action == 'PICK_UP_NUT_FROM_TABLE':
   #   self.state = SimStates.goto_nut
   #   self.step(keyboard_input=False)
@@ -1065,7 +1063,7 @@ def _get_key(val, my_dict):
 
     return "key doesn't exist"
 
-def _is_in_bin(self, obj, bin):
+def _is_in_bin(self, obj, bin, r):
     '''
     Check if an item is in a certain bin.
 
@@ -1080,8 +1078,8 @@ def _is_in_bin(self, obj, bin):
     offset = 0.15
     dist_to_bin = np.sqrt((pos_obj[0] - (pos_bin[0] - offset))**2 + (pos_obj[2] - pos_bin[2])**2)
     # print(obj,pos_obj, pos_bin, dist_to_bin)
-    if dist_to_bin < 0.4:
-        # The radius of the bowl is greater than 0.3 but it is hard to grasp at the edge.
+    if dist_to_bin < r:
+        # The radius of the bowl is greater than 0.4 but it is hard to grasp at the edge.
         return True
     else:
         return False
